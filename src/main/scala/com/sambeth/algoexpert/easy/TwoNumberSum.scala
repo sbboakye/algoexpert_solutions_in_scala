@@ -1,6 +1,8 @@
 package com.sambeth.algoexpert.easy
 
+import scala.annotation.tailrec
 import scala.collection.mutable
+import scala.collection.immutable
 
 object TwoNumberSum {
 
@@ -30,8 +32,20 @@ object TwoNumberSum {
     List()
 
 
+  private def twoNumberSumFP(array: List[Int], targetSum: Int): List[Int] =
+    @tailrec
+    def findPair(hashMap: immutable.Map[Int, Boolean], curIndex: Int): List[Int] =
+      val curNum = array(curIndex)
+      val maybeNum = targetSum - curNum
+      hashMap.get(maybeNum) match {
+        case Some(value) => List(curNum, maybeNum)
+        case None => findPair(hashMap + (curNum -> true), curIndex + 1)
+      }
+
+    findPair(immutable.Map(), 0)
+
 
   @main def main: Unit =
-    val output = twoNumberSumTwo(List(3, 5, -4, 8, 11, 1, -1, 6), 10)
+    val output = twoNumberSumFP(List(3, 5, -4, 8, 11, 1, -1, 6), 10)
     println(output)
 }
