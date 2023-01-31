@@ -45,7 +45,7 @@ object TwoNumberSum {
     findPair(immutable.Map(), 0)
 
 
-  @main def main: Unit =
+  @main def mainOne: Unit =
     val output = twoNumberSumFP(List(3, 5, -4, 8, 11, 1, -1, 6), 10)
     println(output)
 }
