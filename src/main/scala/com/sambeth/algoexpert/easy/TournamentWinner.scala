@@ -1,5 +1,6 @@
 package com.sambeth.algoexpert.easy
 
+import scala.annotation.tailrec
 import scala.collection.mutable
 import scala.collection.immutable
 
@@ -51,8 +52,27 @@ object TournamentWinner {
     bestTeam
 
   private def tournamentWinnerRecursion(competitions: List[List[String]], results: List[Int]): String =
-    // val winningTeamScore: immutable.Map[String, Int] = immutable.Map.empty[String, Int]
-    ???
+    val bestTeam: String = "None"
+    val scores: immutable.Map[String, Int] = Map(bestTeam -> 0)
+
+    @tailrec
+    def calculateWinningTeam(scores: immutable.Map[String, Int], results: List[Int], index: Int, previousWinningTeam: String, points: Int = 3): String =
+      results match
+        case head :: tail =>
+          val homeTeam :: awayTeam :: Nil = competitions(index)
+          val currentWinningTeam = if (head == 0) awayTeam else homeTeam
+          val updatedScores = if (scores.contains(currentWinningTeam)) scores.updated(currentWinningTeam, scores(currentWinningTeam) + points) else scores + (currentWinningTeam -> points)
+          val bestTeamSoFar = if (updatedScores(currentWinningTeam) > updatedScores(previousWinningTeam)) currentWinningTeam else previousWinningTeam
+
+          calculateWinningTeam(
+            updatedScores,
+            tail,
+            index + 1,
+            bestTeamSoFar
+          )
+        case Nil => previousWinningTeam
+
+    calculateWinningTeam(scores, results, 0, bestTeam)
 
   @main def mainFour: Unit =
     println(tournamentWinnerOne(
@@ -73,13 +93,13 @@ object TournamentWinner {
       List(0, 0, 1)
     ))
 
-//    println(tournamentWinnerRecursion(
-//      List(
-//        List("HTML", "C%"),
-//        List("C%", "Python"),
-//        List("Python", "HTML"),
-//      ),
-//      List(0, 0, 1)
-//    ))
+    println(tournamentWinnerRecursion(
+      List(
+        List("HTML", "C%"),
+        List("C%", "Python"),
+        List("Python", "HTML"),
+      ),
+      List(0, 0, 1)
+    ))
 
 }
