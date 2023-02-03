@@ -39,7 +39,7 @@ object IsValidSequence {
 
       countdown == 0
 
-  private def isValidSequenceFP(array: List[Int], sequence: List[Int]): Boolean =
+  private def isValidSequenceRecursion(array: List[Int], sequence: List[Int]): Boolean =
     @tailrec
     def loopThroughArray(seq: List[Int], index: Int, countdown: Int): Boolean =
       seq match
@@ -53,6 +53,6 @@ object IsValidSequence {
     println(isValidSequenceForLoop(List(5, 1, 22, 25, 6, -1, 8, 10), List(22, 25, 6))) // true
     println(isValidSequenceWhileLoop(List(5, 1, 22, 25, 6, -1, 8, 10), List(22, 25, 6))) // true
     println(isValidSequenceWhileLoop(List(5, 1, 22, 25, 6, -1, 8, 10), List(5, 3, 12, 21, 22, 25, 6, 9, 10))) // false
-    println(isValidSequenceFP(List(1, 22, 25, 6, -1, 8, 10), List(1, 2, 22))) // false
-    println(isValidSequenceFP(List(1, 1, 1, 1, 1), List(1, 1, 1))) // true
+    println(isValidSequenceRecursion(List(1, 22, 25, 6, -1, 8, 10), List(1, 2, 22))) // false
+    println(isValidSequenceRecursion(List(1, 1, 1, 1, 1), List(1, 1, 1))) // true
 }

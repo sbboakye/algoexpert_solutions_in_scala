@@ -32,7 +32,7 @@ object TwoNumberSum {
     List()
 
 
-  private def twoNumberSumFP(array: List[Int], targetSum: Int): List[Int] =
+  private def twoNumberSumRecursion(array: List[Int], targetSum: Int): List[Int] =
     @tailrec
     def findPair(hashMap: immutable.Map[Int, Boolean], curIndex: Int): List[Int] =
       val curNum = array(curIndex)
@@ -46,6 +46,6 @@ object TwoNumberSum {
 
 
   @main def mainOne: Unit =
-    val output = twoNumberSumFP(List(3, 5, -4, 8, 11, 1, -1, 6), 10)
+    val output = twoNumberSumRecursion(List(3, 5, -4, 8, 11, 1, -1, 6), 10)
     println(output)
 }

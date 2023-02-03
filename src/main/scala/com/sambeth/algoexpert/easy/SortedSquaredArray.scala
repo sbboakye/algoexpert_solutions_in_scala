@@ -26,7 +26,7 @@ object SortedSquaredArray {
 
     sortedArray.toList
 
-  private def sortedSquaredArrayFP(array: List[Int]): List[Int] =
+  private def sortedSquaredArrayRecursion(array: List[Int]): List[Int] =
     val sortedArray: List[Int] = Array.fill(array.length)(0).toList
 
     @tailrec
@@ -47,11 +47,11 @@ object SortedSquaredArray {
     println(sortedSquaredArrayUsingSorted(List(1,2,3,5,6,8,9)))
     println(sortedSquaredArrayNotUsingSorted(List(-2, -1)))
     println(sortedSquaredArrayNotUsingSorted(List(-5, -4, -3, -2, -1)))
-    println(sortedSquaredArrayFP(List(1, 2, 3, 5, 6, 8, 9)))
-    println(sortedSquaredArrayFP(List(-2, -1)))
-    println(sortedSquaredArrayFP(List(-5, -4, -3, -2, -1)))
-    println(sortedSquaredArrayFP(List(-5, -4, -3, -2, -1, 0, 1, 2, 3)))
-    println(sortedSquaredArrayFP(List(-2, -1, 0, 1, 2, 3, 4, 5)))
+    println(sortedSquaredArrayRecursion(List(1, 2, 3, 5, 6, 8, 9)))
+    println(sortedSquaredArrayRecursion(List(-2, -1)))
+    println(sortedSquaredArrayRecursion(List(-5, -4, -3, -2, -1)))
+    println(sortedSquaredArrayRecursion(List(-5, -4, -3, -2, -1, 0, 1, 2, 3)))
+    println(sortedSquaredArrayRecursion(List(-2, -1, 0, 1, 2, 3, 4, 5)))
     println(sortedSquaredArrayNotUsingSorted(List(-2, -1, 0, 1, 2, 3, 4, 5)))
 
 }
