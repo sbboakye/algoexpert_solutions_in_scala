@@ -4,17 +4,11 @@ import scala.annotation.tailrec
 
 object FindClosestValueInBst {
 
-  class BST(var value: Int, var right: Option[BST] = None, var left: Option[BST] = None):
-
-    override def toString: String = s"BST($value, right: $right, left: $left)"
+  case class BST(value: Int, right: Option[BST], left: Option[BST])
 
   object BST {
-
     def apply(value: Int, right: Option[BST] = None, left: Option[BST] = None): BST =
       new BST(value, right, left)
-
-    def unapply(bst: BST): Option[(Int, Option[BST], Option[BST])] =
-      Some((bst.value, bst.right, bst.left))
   }
 
   private def findClosestValueInBstRecursion(tree: BST, target: Int): Int =
@@ -40,25 +34,16 @@ object FindClosestValueInBst {
 
 
   @main def mainSix: Unit =
-    val tree = BST(10)
-    val f_five = BST(5)
-    val s_five = BST(5)
-    val fifteen = BST(15)
-    val two = BST(2)
-    val thirteen = BST(13)
-    val twenty_two = BST(22)
-    val fourteen = BST(14)
     val one = BST(1)
+    val fourteen = BST(14)
+    val fiveChild = BST(5)
+    val twentyTwo = BST(22)
+    val two = BST(2, left = Option(one))
+    val fiveParent = BST(5, right = Option(fiveChild), left = Option(two))
+    val thirteen = BST(13, right = Option(fourteen))
+    val fifteen = BST(15, right = Option(twentyTwo), left = Option(thirteen))
+    val root = BST(10, right = Option(fifteen), left = Option(fiveParent))
 
-    tree.left = Some(f_five)
-    tree.right = Some(fifteen)
-    f_five.left = Some(two)
-    f_five.right = Some(s_five)
-    fifteen.left = Some(thirteen)
-    fifteen.right = Some(twenty_two)
-    two.left = Some(one)
-    thirteen.right = Some(fourteen)
-
-    println(findClosestValueInBstRecursion(tree, 12))
+    println(findClosestValueInBstRecursion(root, 12))
 
 }
