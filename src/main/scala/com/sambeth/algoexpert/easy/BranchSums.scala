@@ -43,9 +43,9 @@ object BranchSums {
             case BST(_, right: Some[BST], left: Some[BST]) =>
               getBranchSums(left, sums, runningSum + newRunningSum)
               getBranchSums(right, sums, runningSum + newRunningSum)
-            case BST(_, right, left: Some[BST]) if right.isEmpty => getBranchSums(left, sums, runningSum + newRunningSum)
-            case BST(_, right: Some[BST], left) if left.isEmpty => getBranchSums(right, sums, runningSum + newRunningSum)
-            case BST(_, right, left) if right.isEmpty && left.isEmpty => sums += runningSum + newRunningSum
+            case BST(_, _: None.type, left: Some[BST]) => getBranchSums(left, sums, runningSum + newRunningSum)
+            case BST(_, right: Some[BST], _: None.type) => getBranchSums(right, sums, runningSum + newRunningSum)
+            case BST(_, _: None.type, _: None.type) => sums += runningSum + newRunningSum
 
     getBranchSums(root = Option(root), runningSum = 0)
 
