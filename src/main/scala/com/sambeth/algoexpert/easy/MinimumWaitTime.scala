@@ -21,12 +21,12 @@ object MinimumWaitTime {
   private def minimumWaitTimeRecursion(queries: List[Int]): Int =
 
     @tailrec
-    def getMinimumWaitTime(queries: List[Int], waitTime: Int, waitTimes: ListBuffer[Int]): Int =
+    def getMinimumWaitTime(queries: List[Int], waitTime: Int, minimumWaitTime: Int): Int =
       queries.sorted match
-        case head :: tail => getMinimumWaitTime(tail, waitTime + head, waitTimes += waitTime)
-        case Nil => waitTimes.sum
+        case head :: tail => getMinimumWaitTime(tail, waitTime + head, minimumWaitTime + waitTime)
+        case Nil => minimumWaitTime
 
-    getMinimumWaitTime(queries, waitTime = 0, waitTimes = ListBuffer[Int]())
+    getMinimumWaitTime(queries, waitTime = 0, minimumWaitTime = 0)
 
   private def minimumWaitTimeRecursionAnother(queries: List[Int]): Int =
 
@@ -40,8 +40,8 @@ object MinimumWaitTime {
 
 
   @main def mainTen: Unit =
-    println(minimumWaitTime(List(2,1,6,2,3)))
+//    println(minimumWaitTime(List(2,1,6,2,3)))
     println(minimumWaitTimeRecursion(List(2,1,6,2,3)))
-    println(minimumWaitTimeRecursionAnother(List(2,1,6,2,3)))
+//    println(minimumWaitTimeRecursionAnother(List(2,1,6,2,3)))
 
 }
