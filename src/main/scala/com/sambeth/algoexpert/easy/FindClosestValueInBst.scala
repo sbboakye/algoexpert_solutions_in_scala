@@ -9,18 +9,18 @@ object FindClosestValueInBst {
     @tailrec
     def findClosestNumber(tree: BinaryTree, closestSoFar: Int): Int =
       tree match
-        case BinaryTree(value, right, _) if (value < target) && right.isEmpty =>
+        case BinaryTree(value, _, right) if (value < target) && right.isEmpty =>
           closestSoFar
-        case BinaryTree(value, right, _) if (value < target) && right.isDefined && (Math.abs(closestSoFar - target) > Math.abs(right.get.value - target)) =>
+        case BinaryTree(value, _, right) if (value < target) && right.isDefined && (Math.abs(closestSoFar - target) > Math.abs(right.get.value - target)) =>
           findClosestNumber(right.get, right.get.value)
-        case BinaryTree(value, right, _) if (value < target) && right.isDefined && (Math.abs(closestSoFar - target) < Math.abs(right.get.value - target)) =>
+        case BinaryTree(value, _, right) if (value < target) && right.isDefined && (Math.abs(closestSoFar - target) < Math.abs(right.get.value - target)) =>
           findClosestNumber(right.get, closestSoFar)
 
-        case BinaryTree(value, _, left) if (value > target) && left.isEmpty =>
+        case BinaryTree(value, left, _) if (value > target) && left.isEmpty =>
           closestSoFar
-        case BinaryTree(value, _, left) if (value > target) && left.isDefined && (Math.abs(closestSoFar - target) > Math.abs(left.get.value - target)) =>
+        case BinaryTree(value, left, _) if (value > target) && left.isDefined && (Math.abs(closestSoFar - target) > Math.abs(left.get.value - target)) =>
           findClosestNumber(left.get, left.get.value)
-        case BinaryTree(value, _, left) if (value > target) && left.isDefined && (Math.abs(closestSoFar - target) < Math.abs(left.get.value - target)) =>
+        case BinaryTree(value, left, _) if (value > target) && left.isDefined && (Math.abs(closestSoFar - target) < Math.abs(left.get.value - target)) =>
           findClosestNumber(left.get, closestSoFar)
 
     findClosestNumber(tree, tree.value)
