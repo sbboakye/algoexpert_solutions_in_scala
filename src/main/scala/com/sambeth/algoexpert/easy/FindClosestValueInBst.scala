@@ -28,15 +28,16 @@ object FindClosestValueInBst {
 
   @main def mainSix: Unit =
     val root = BinaryTree(10)
-      .add(15)
-      .add(22)
-      .add(13)
-      .add(14)
-      .add(5)
       .add(5)
       .add(2)
       .add(1)
+      .add(5)
+      .add(15)
+      .add(13)
+      .add(14)
+      .add(22)
 
+    println(root)
     println(findClosestValueInBstRecursion(root, 12))
 
 }

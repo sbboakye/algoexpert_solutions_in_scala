@@ -13,7 +13,7 @@ case class BinaryTree(value: Int, left: Option[BinaryTree] = None, right: Option
       right.flatMap(_.insert(aValue)) orElse Option(BinaryTree(aValue))
 
     aValue.compare(value) match {
-      case 0 => Option(this)
+      case 0 => Option(BinaryTree(value, left, insertRight(aValue)))
       case -1 => Option(BinaryTree(value, insertLeft(aValue), right))
       case 1 => Option(BinaryTree(value, left, insertRight(aValue)))
     }
